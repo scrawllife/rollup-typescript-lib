@@ -5,7 +5,8 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import json from "@rollup/plugin-json";
 import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
+// import typescript from "@rollup/plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 
 import pkg from "./package.json" assert { type: "json" };
 
@@ -15,19 +16,38 @@ const resolve = (...args) => {
   return path.resolve(path.dirname(fileURLToPath(import.meta.url)), ...args);
 };
 
+const outPutConfig = (config) => {
+  return config.map((i) => ({
+    ...i,
+    sourcemap: true,
+    // dir: resolve(`./dist/${i.format}`),
+    // preserveModules: true,
+    // preserveModulesRoot: "./src",
+    // exports: "auto",
+  }));
+};
+
 export default {
-  input: resolve("./src/index.ts"),
-  output: {
-    file: resolve("./", pkg.main), // 为了项目的统一性，这里读取 package.json 中的配置项
-    format: "cjs",
-  },
+  input: resolve("./lib/index.ts"),
+  output: outPutConfig([
+    {
+      file: resolve("./", pkg.main),
+      format: "cjs",
+    },
+    {
+      file: resolve("./", pkg.module),
+      format: "es",
+    },
+  ]),
   plugins: [
-    commonjs(),
     nodeResolve({
       extensions,
       modulesOnly: true,
     }),
-    typescript(),
+    typescript({
+      useTsconfigDeclarationDir: true,
+    }),
+    commonjs(),
     babel({
       exclude: "node_modules/**",
       extensions,

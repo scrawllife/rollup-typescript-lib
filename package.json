@@ -2,10 +2,12 @@
   "name": "@scrawllife/rollup-typescript-lib",
   "version": "1.0.0",
   "description": "rollup-typescript-lib",
-  "main": "dist/index.js",
-  "types": "dist/types",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./types/lib/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "rimraf": "rimraf dist types",
+    "build": "pnpm rimraf & rollup -c",
     "dev": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prerelease": "pnpm build",
@@ -18,7 +20,6 @@
     "README.md"
   ],
   "keywords": [],
-  
   "author": {
     "name": "zuigzm",
     "email": "zuigzm@gmail.com"
@@ -35,6 +36,7 @@
     "@rollup/plugin-typescript": "^11.1.5",
     "rimraf": "^5.0.5",
     "rollup": "^4.1.4",
+    "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   }
