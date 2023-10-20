@@ -1,16 +1,18 @@
 import path from "path";
+import { fileURLToPath } from "node:url";
 import babel from "@rollup/plugin-babel";
 import nodeResolve from "@rollup/plugin-node-resolve";
-
-import { uglify } from "rollup-plugin-uglify";
+import terser from "@rollup/plugin-terser";
 import json from "@rollup/plugin-json";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
 
-import pkg from "./package.json";
+import pkg from "./package.json" assert { type: "json" };
 
 const extensions = [".js", ".ts"];
 
-const resolve = function (...args) {
-  return path.resolve(__dirname, ...args);
+const resolve = (...args) => {
+  return path.resolve(path.dirname(fileURLToPath(import.meta.url)), ...args);
 };
 
 export default {
@@ -20,15 +22,17 @@ export default {
     format: "cjs",
   },
   plugins: [
+    commonjs(),
     nodeResolve({
       extensions,
       modulesOnly: true,
     }),
+    typescript(),
     babel({
       exclude: "node_modules/**",
       extensions,
     }),
     json(),
-    uglify(),
+    terser(),
   ],
 };

@@ -2,25 +2,37 @@
   "name": "@scrawllife/rollup-typescript-lib",
   "version": "1.0.0",
   "description": "rollup-typescript-lib",
-  "main": "lib/index.js",
-  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/types",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "lib",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "zuigzm",
+    "email": "zuigzm@gmail.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-typescript": "^7.23.2",
     "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "rimraf": "^5.0.5",
     "rollup": "^4.1.4",
-    "rollup-plugin-uglify": "^6.0.4",
+    "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   }
 }
