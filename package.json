@@ -7,7 +7,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prerelease": "pnpm build",
+    "pretest": "pnpm build"
   },
   "files": [
     "lib",
@@ -16,6 +18,7 @@
     "README.md"
   ],
   "keywords": [],
+  
   "author": {
     "name": "zuigzm",
     "email": "zuigzm@gmail.com"
