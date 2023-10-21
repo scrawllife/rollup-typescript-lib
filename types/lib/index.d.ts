@@ -1,5 +1,2 @@
-interface IVersion {
-    version: string;
-}
-declare const _default: IVersion;
+declare const _default: "rollup-typescript-lib";
 export default _default;

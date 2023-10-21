@@ -50,6 +50,7 @@ export default {
     commonjs(),
     babel({
       exclude: "node_modules/**",
+      babelHelpers: "bundled",
       extensions,
     }),
     json(),
