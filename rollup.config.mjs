@@ -20,10 +20,6 @@ const outPutConfig = (config) => {
   return config.map((i) => ({
     ...i,
     sourcemap: true,
-    // dir: resolve(`./dist/${i.format}`),
-    // preserveModules: true,
-    // preserveModulesRoot: "./src",
-    // exports: "auto",
   }));
 };
 
@@ -40,6 +36,7 @@ export default {
     },
   ]),
   plugins: [
+    commonjs(),
     nodeResolve({
       extensions,
       modulesOnly: true,
@@ -47,10 +44,9 @@ export default {
     typescript({
       useTsconfigDeclarationDir: true,
     }),
-    commonjs(),
     babel({
       exclude: "node_modules/**",
-      babelHelpers: "bundled",
+      babelHelpers: "runtime",
       extensions,
     }),
     json(),
